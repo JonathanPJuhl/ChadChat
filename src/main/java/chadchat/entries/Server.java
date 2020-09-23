@@ -1,6 +1,7 @@
 package chadchat.entries;
 
 import chadchat.app.SqlController;
+import chadchat.app.StartMenu;
 import chadchat.app.TUI;
 import chadchat.domain.User;
 
@@ -49,6 +50,10 @@ public class Server {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         SqlController controller = new SqlController();
         controller.controller();
+        StartMenu start = new StartMenu();
+        PrintWriter pw = new PrintWriter(System.out);
+        Scanner scanner = new Scanner(System.in);
+        TUI tui = new TUI(pw, scanner);
        // dbTest();
     }
 
