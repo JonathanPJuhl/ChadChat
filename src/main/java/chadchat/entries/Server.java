@@ -1,12 +1,16 @@
 package chadchat.entries;
 
 import chadchat.app.SqlController;
+import chadchat.app.StartMenu;
+import chadchat.app.TUI;
 import chadchat.domain.User;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Server {
     // The entry point of the ChatChad server
@@ -46,6 +50,10 @@ public class Server {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         SqlController controller = new SqlController();
         controller.controller();
+        StartMenu start = new StartMenu();
+        PrintWriter pw = new PrintWriter(System.out);
+        Scanner scanner = new Scanner(System.in);
+        TUI tui = new TUI(pw, scanner);
        // dbTest();
     }
 
