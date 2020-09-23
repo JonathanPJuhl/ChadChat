@@ -1,12 +1,23 @@
 package chadchat.domain;
 
 public class User {
-    private final int id;
-    private final String name;
+    private int id;
+    private String name;
+    private String password;
+    private String mail;
 
-    public User(int id, String name) {
+
+    public User(int id, String name, String password, String mail) {
         this.id = id;
         this.name = name;
+        this.password = password;
+        this.mail = mail;
+    }
+
+    public User(String userName, String password) {
+        this.name = userName;
+        this.password = password;
+
     }
 
     @Override
@@ -14,6 +25,8 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", mail='" + mail + '\'' +
                 '}';
     }
 }

@@ -26,7 +26,7 @@ public class Server {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    private static void dbTest() throws ClassNotFoundException, SQLException {
+    /*private static void dbTest() throws ClassNotFoundException, SQLException {
         Class.forName(JDBC_DRIVER);
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
             var stmt = conn.createStatement();
@@ -40,7 +40,7 @@ public class Server {
                 System.out.println(user);
             }
         }
-    }
+    }*/
 
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
