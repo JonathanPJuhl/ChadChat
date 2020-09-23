@@ -7,11 +7,11 @@ public class DBConnect {
 
     // Don't need JDBC driver in java 4+
     //final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/chadchadtest?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/chadchatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "12345678";
+    static final String PASS = "997865root";
 
     public static Connection getConnection() throws SQLException
     {

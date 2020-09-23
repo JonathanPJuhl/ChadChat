@@ -8,7 +8,7 @@ public class SqlStatements {
 
     public String createUserTable(){
 
-        String sql = "CREATE TABLE IF NOT EXISTS users(ID int, UserName VARCHAR(45) unique, PassWord VARCHAR(45), PRIMARY KEY (ID));";
+        String sql = "CREATE TABLE IF NOT EXISTS users(ID int, UserName VARCHAR(45) unique, PassWord VARCHAR(45), Email VARCHAR(45), PRIMARY KEY (ID));";
             return sql;
     }
 }
