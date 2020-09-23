@@ -1,12 +1,15 @@
 package chadchat.entries;
 
 import chadchat.app.SqlController;
+import chadchat.app.TUI;
 import chadchat.domain.User;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Server {
     // The entry point of the ChatChad server
