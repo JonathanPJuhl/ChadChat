@@ -1,11 +1,12 @@
 package chadchat.app;
 
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 public class StartMenu {
-   // TUI tui = new TUI(new Scanner(System.in), new PrintWriter(System.out));
-    private TUI tui;
+    public StartMenu(TUI tui) {
+        this.tui = tui;
+    }
+
+
+    private final TUI tui;
     public void startChadChat(int answer){
         String response = Integer.toString(answer);
         switch (response){
