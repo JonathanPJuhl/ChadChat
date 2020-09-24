@@ -1,9 +1,5 @@
 package chadchat.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-
 public class SqlStatements {
 
     public String createUserTable(){
