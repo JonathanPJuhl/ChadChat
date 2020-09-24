@@ -1,5 +1,7 @@
 package chadchat.db;
 
+import chadchat.domain.User;
+
 public class SqlStatements {
 
     public String createUserTable(){
@@ -27,6 +29,14 @@ public class SqlStatements {
     }
     public static String doesEmailAlreadyExist(String eMail){
         String sql = "SELECT * FROM users WHERE Email = '" + eMail + "'";
+        return sql;
+    }
+    public static String insertUserIntoDB(User user){
+        String sql = "INSERT INTO users VALUES (" + user.getId() +
+                ", " + user.getName() +
+                ", " + user.getPassword() +
+                ", " + user.getMail() +
+                ");";
         return sql;
     }
 }

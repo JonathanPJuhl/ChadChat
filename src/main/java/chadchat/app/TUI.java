@@ -42,7 +42,7 @@ public class TUI {
         return new User(userName, password);
     }
 
-    public User signupPage() throws SQLException, ClassNotFoundException {
+    public void signupPage() throws SQLException, ClassNotFoundException {
         DBConnect db = new DBConnect();
         String userName = "";
         String eMail = "";
@@ -54,7 +54,7 @@ public class TUI {
         boolean doPasswordsMatch = false;
 
         int iD = 0;
-        message.println("Welcome, please sign up! ");
+        message.println("Welcome, please sign up!");
         message.flush();
 
     //check if username is already in db
@@ -80,7 +80,9 @@ public class TUI {
             if(!rs.next()){
                 doesEmailExist=true;
 
-            }else {message.println("Email taken, please try another one.");}
+            }else {
+                message.println("Email taken, please try another one.");}
+                message.flush();
         }
 
     //When username & mail check is okay, prompt for password and pass it to SHA256
@@ -105,6 +107,7 @@ public class TUI {
     //make the id for this user be that
         iD = db.getLatestIDFromDB(SqlStatements.getAllIds());
 
-        return new User(iD, userName, eMail, password2);
+    //Creates a user in the database based on previous input information.
+        db.executeQuery(SqlStatements.insertUserIntoDB(new User(iD, userName, eMail, password2)));
     }
 }
