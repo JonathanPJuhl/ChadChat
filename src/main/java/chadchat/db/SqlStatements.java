@@ -17,4 +17,16 @@ public class SqlStatements {
                 "markAsRead TINYINT(1));";
         return sql;
     }
+    public static String getAllIds(){
+        String sql = "SELECT ID FROM users";
+        return sql;
+    }
+    public static String doesUsernameAlreadyExist(String username){
+        String sql = "SELECT * FROM users WHERE username = '" + username + "'";
+        return sql;
+    }
+    public static String doesEmailAlreadyExist(String eMail){
+        String sql = "SELECT * FROM users WHERE Email = '" + eMail + "'";
+        return sql;
+    }
 }
