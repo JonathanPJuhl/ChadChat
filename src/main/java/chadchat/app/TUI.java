@@ -45,12 +45,15 @@ public class TUI {
     //check if username is already in db
     // if already exists, prompt for name once more
         userName = "";
+
     //When username is ok, ask for email,
         // Check again and prompt if necessary
         eMail = "";
+
     //When username & mail check is okay, prompt for password and pass it to SHA256
     //which will then input hexcode into db.
         password = SHA256.sha256("");
+
     //Make method to find last id from db
     //make the id for this user be that+1
 
