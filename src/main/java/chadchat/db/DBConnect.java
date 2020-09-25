@@ -27,7 +27,8 @@ public class DBConnect {
         ResultSet rs = sqlState.executeQuery(sql);
         return rs;
     }
-    public int executeUpdate(String sql, Connection conn) throws SQLException {
+    public int executeUpdate(String sql) throws SQLException {
+        Connection conn = getConnection();
         PreparedStatement sqlState = conn.prepareStatement(sql);
         int amountUpdated = sqlState.executeUpdate(sql);
        return amountUpdated;

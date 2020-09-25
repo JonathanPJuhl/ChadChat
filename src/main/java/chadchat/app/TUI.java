@@ -56,24 +56,30 @@ public class TUI {
         int iD = 0;
         message.println("Welcome, please sign up!");
         message.flush();
+        userInput.nextLine();
 
     //check if username is already in db
     // if already exists, prompt for name once more
 
         while(!doesUsernameExist) {
-            message.print("Please type in username: ");
+            message.println("Please type in username: ");
             message.flush();
             userName = userInput.nextLine();
             ResultSet rs = db.executeQuery(SqlStatements.doesUsernameAlreadyExist(userName));
+
             if(!rs.next()){
                 doesUsernameExist=true;
 
-            }else {message.println("Username taken, please try another one.");}
+            }else {
+                message.println("Username taken, please try another one.");
+                message.flush();
+            }
+
         }
     //When username is ok, ask for email,
         // Check again and prompt if necessary
         while(!doesEmailExist) {
-            message.print("Please type in email: ");
+            message.println("Please type in email: ");
             message.flush();
             eMail = userInput.nextLine();
             ResultSet rs = db.executeQuery(SqlStatements.doesEmailAlreadyExist(eMail));
@@ -95,7 +101,7 @@ public class TUI {
             message.flush();
             password1 = userInput.nextLine();
             //method for making sure pass is correct
-            if (password == password1) {
+            if (password.equals(password1)) {
                 password2 = SHA256.sha256(password);
                 doPasswordsMatch = true;
             } else{
@@ -108,6 +114,6 @@ public class TUI {
         iD = db.getLatestIDFromDB(SqlStatements.getAllIds());
 
     //Creates a user in the database based on previous input information.
-        db.executeQuery(SqlStatements.insertUserIntoDB(new User(iD, userName, eMail, password2)));
+        db.executeUpdate(SqlStatements.insertUserIntoDB(new User(iD, userName, password, eMail)));
     }
 }

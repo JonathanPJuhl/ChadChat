@@ -10,6 +10,6 @@ public class SqlController {
     SqlStatements sql = new SqlStatements();
 
     public void controller() throws SQLException, ClassNotFoundException {
-        db.executeUpdate(sql.createUserTable(), DBConnect.getConnection());
+        db.executeUpdate(sql.createUserTable());
     }
 }

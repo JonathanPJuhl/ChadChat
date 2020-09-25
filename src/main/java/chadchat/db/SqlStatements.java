@@ -6,7 +6,7 @@ public class SqlStatements {
 
     public String createUserTable(){
 
-        String sql = "CREATE TABLE IF NOT EXISTS users(ID int, UserName VARCHAR(45) unique, PassWord VARCHAR(45), Email VARCHAR(45), PRIMARY KEY (ID));";
+        String sql = "CREATE TABLE IF NOT EXISTS users(ID int, UserName VARCHAR(45) unique, PassWord VARCHAR(250), Email VARCHAR(45), PRIMARY KEY (ID));";
             return sql;
     }
     public String createInboxTable(){
@@ -33,10 +33,11 @@ public class SqlStatements {
     }
     public static String insertUserIntoDB(User user){
         String sql = "INSERT INTO users VALUES (" + user.getId() +
-                ", " + user.getName() +
-                ", " + user.getPassword() +
-                ", " + user.getMail() +
+                ", '" + user.getName() + "'" +
+                ", '" + user.getPassword() + "'" +
+                ", '" + user.getMail() + "'" +
                 ");";
+        System.out.println(sql);
         return sql;
     }
 }
