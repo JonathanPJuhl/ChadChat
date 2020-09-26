@@ -29,9 +29,11 @@ public class TUI {
         return answer;
     }
     //change login to signIn signup with a uppercase U
-    public User loginPage(){
+    public User loginPage() throws SQLException, ClassNotFoundException {
+        DBConnect db = new DBConnect();
         String userName = "";
         String password = "";
+        String password2 = "";
         message.print("Please type in username: ");
         message.flush();
         userName = userInput.nextLine();
@@ -39,6 +41,16 @@ public class TUI {
         message.print("Please type in password: ");
         message.flush();
         password = userInput.nextLine();
+
+        //Make method that checks username vs pass in DB
+        ResultSet rs = db.executeQuery(SqlStatements.checkPassword(new User(userName, password)));
+        while(rs.next()){
+            password2 = rs.getString("PassWord");
+        }
+        if(password.equals(password2)){
+            //Login user
+        }
+
         return new User(userName, password);
     }
 
@@ -114,6 +126,6 @@ public class TUI {
         iD = db.getLatestIDFromDB(SqlStatements.getAllIds());
 
     //Creates a user in the database based on previous input information.
-        db.executeUpdate(SqlStatements.insertUserIntoDB(new User(iD, userName, password, eMail)));
+        db.executeUpdate(SqlStatements.insertUserIntoDB(new User(iD, userName, password2, eMail)));
     }
 }

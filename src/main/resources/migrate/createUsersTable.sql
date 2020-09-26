@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS users(
-ID int,
-UserName VARCHAR(45) unique,
-PassWord VARCHAR(45),
-Email VARCHAR(45),
-PRIMARY KEY (ID));
+ID int NOT NULL unique,
+Username varchar(45) unique,
+Pass VARCHAR (64),
+Email VARCHAR(45) unique,
+primary key (ID)
+);

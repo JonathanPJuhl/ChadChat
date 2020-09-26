@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 public class StartMenu {
     public StartMenu(TUI tui) {
+
         this.tui = tui;
     }
 

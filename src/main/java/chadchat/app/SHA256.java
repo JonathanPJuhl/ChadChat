@@ -6,6 +6,7 @@ public class SHA256 {
 
 
     public static String sha256(String base) {
+
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(base.getBytes("UTF-8"));
@@ -16,7 +17,7 @@ public class SHA256 {
                 if(hex.length() == 1) hexString.append('0');
                 hexString.append(hex);
             }
-
+            System.out.println(hexString.length());
             return hexString.toString();
 
 

@@ -4,10 +4,16 @@ import chadchat.domain.User;
 
 public class SqlStatements {
 
+    public static String checkPassword(User user) {
+
+        String sql = "SELECT PassWord FROM user WHERE UserName='"+user.getName()+"';";
+        return sql;
+    }
+
     public String createUserTable(){
 
         String sql = "CREATE TABLE IF NOT EXISTS users(ID int, UserName VARCHAR(45) unique, PassWord VARCHAR(250), Email VARCHAR(45), PRIMARY KEY (ID));";
-            return sql;
+        return sql;
     }
     public String createInboxTable(){
         String sql = "CREATE TABLE IF NOT EXISTS inbox("+
