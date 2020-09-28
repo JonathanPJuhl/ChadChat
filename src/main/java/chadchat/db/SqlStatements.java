@@ -6,7 +6,7 @@ public class SqlStatements {
 
     public static String checkPassword(User user) {
 
-        String sql = "SELECT PassWord FROM user WHERE UserName='"+user.getName()+"';";
+        String sql = "SELECT PassWord FROM users WHERE UserName='"+user.getName()+"';";
         return sql;
     }
 
@@ -30,7 +30,7 @@ public class SqlStatements {
         return sql;
     }
     public static String doesUsernameAlreadyExist(String username){
-        String sql = "SELECT * FROM users WHERE username = '" + username + "'";
+        String sql = "SELECT * FROM users WHERE userName = '" + username + "'";
         return sql;
     }
     public static String doesEmailAlreadyExist(String eMail){
@@ -43,7 +43,6 @@ public class SqlStatements {
                 ", '" + user.getPassword() + "'" +
                 ", '" + user.getMail() + "'" +
                 ");";
-        System.out.println(sql);
         return sql;
     }
 }

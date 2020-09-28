@@ -29,29 +29,38 @@ public class TUI {
         return answer;
     }
     //change login to signIn signup with a uppercase U
-    public User loginPage() throws SQLException, ClassNotFoundException {
+    public void loginPage() throws SQLException, ClassNotFoundException {
         DBConnect db = new DBConnect();
         String userName = "";
         String password = "";
         String password2 = "";
-        message.print("Please type in username: ");
-        message.flush();
-        userName = userInput.nextLine();
-        //password tastet ind som "*"
-        message.print("Please type in password: ");
-        message.flush();
-        password = userInput.nextLine();
+        boolean doPassWordsMatch = false;
+        userInput.nextLine();
+        while(!doPassWordsMatch) {
 
-        //Make method that checks username vs pass in DB
-        ResultSet rs = db.executeQuery(SqlStatements.checkPassword(new User(userName, password)));
-        while(rs.next()){
-            password2 = rs.getString("PassWord");
-        }
-        if(password.equals(password2)){
-            //Login user
-        }
+            message.println("Please type in username: ");
+            message.flush();
+            userName = userInput.nextLine();
+            //password tastet ind som "*"
+            message.println("Please type in password: ");
+            message.flush();
+            password = userInput.nextLine();
 
-        return new User(userName, password);
+            //Make method that checks username vs pass in DB
+            ResultSet rs = db.executeQuery(SqlStatements.checkPassword(new User(userName, password)));
+            while (rs.next()) {
+                password2 = rs.getString("PassWord");
+            }
+            if (SHA256.sha256(password).equals(password2)) {
+                doPassWordsMatch = true;
+                //Login user to a place where user can start chat with a given user
+                //User has an option to view unread messages
+                //User can join chatrooms
+            } else {
+                message.println("Wrong username or password, try again. \n");
+                message.flush();
+            }
+        }
     }
 
     public void signupPage() throws SQLException, ClassNotFoundException {
