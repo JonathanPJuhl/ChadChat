@@ -41,6 +41,7 @@ public class TUI {
             message.println("Please type in username: ");
             message.flush();
             userName = userInput.nextLine();
+
             //password tastet ind som "*"
             message.println("Please type in password: ");
             message.flush();
