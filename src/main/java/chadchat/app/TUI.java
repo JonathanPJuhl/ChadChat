@@ -4,6 +4,7 @@ import chadchat.db.DBConnect;
 import chadchat.db.SqlStatements;
 import chadchat.domain.User;
 
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +13,9 @@ import java.util.Scanner;
 public class TUI {
 
     private final PrintWriter message;
-    private final Scanner userInput;
+    private final InputStream userInput;
 
-    public TUI(PrintWriter message, Scanner userInput) {
+    public TUI(InputStream userInput, PrintWriter message) {
         this.message = message;
         this.userInput = userInput;
     }

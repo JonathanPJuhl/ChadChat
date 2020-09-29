@@ -1,6 +1,6 @@
 package chadchat.entries;
 
-import quiztastic.ui.Protocol;
+import chadchat.app.TUI;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class TUIServer implements Closeable {
 
@@ -43,9 +44,9 @@ public class TUIServer implements Closeable {
             public void run() {
                 try {
                     System.out.println("Server accepts requests at: " + openSocket);
-                    Protocol p = new Protocol(openSocket.getInputStream(),
+                    TUI p = new TUI(openSocket.getInputStream(),
                             new PrintWriter(openSocket.getOutputStream()));
-                    p.run();
+                    p.welcomeMessage();
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {

@@ -4,10 +4,7 @@ import chadchat.app.SqlController;
 import chadchat.app.StartMenu;
 import chadchat.app.TUI;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -19,8 +16,9 @@ public class Server {
         SqlController controller = new SqlController();
         controller.controller();
         PrintWriter pw = new PrintWriter(System.out);
-        Scanner scanner = new Scanner(System.in);
-        TUI tui = new TUI(pw, scanner);
+        //Scanner scanner = new Scanner(System.in);
+        InputStream scanner = null;
+        TUI tui = new TUI(scanner, pw);
         StartMenu start = new StartMenu(tui);
         start.startChadChat(tui.welcomeMessage());
 
