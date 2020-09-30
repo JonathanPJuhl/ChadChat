@@ -13,7 +13,7 @@ public class Server {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
         //Migrate.runMigrations();
-        SqlController controller = new SqlController();
+       /* SqlController controller = new SqlController();
         controller.controller();
         PrintWriter pw = new PrintWriter(System.out);
         //Scanner scanner = new Scanner(System.in);
@@ -21,7 +21,7 @@ public class Server {
         TUI tui = new TUI(scanner, pw);
         StartMenu start = new StartMenu(tui);
         start.startChadChat(tui.welcomeMessage());
-
+*/
     }
 
 }

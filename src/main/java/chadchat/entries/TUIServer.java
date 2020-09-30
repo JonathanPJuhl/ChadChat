@@ -1,6 +1,7 @@
 package chadchat.entries;
 
 import chadchat.app.TUI;
+import chadchat.ui.Protocol;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class TUIServer implements Closeable {
@@ -44,10 +46,14 @@ public class TUIServer implements Closeable {
             public void run() {
                 try {
                     System.out.println("Server accepts requests at: " + openSocket);
-                    TUI p = new TUI(openSocket.getInputStream(),
+                    Protocol p = new Protocol(openSocket.getInputStream(),
                             new PrintWriter(openSocket.getOutputStream()));
-                    p.welcomeMessage();
+                    p.run();
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } finally {
                     try {

@@ -13,9 +13,9 @@ import java.util.Scanner;
 public class TUI {
 
     private final PrintWriter message;
-    private final InputStream userInput;
+    private final Scanner userInput;
 
-    public TUI(InputStream userInput, PrintWriter message) {
+    public TUI(Scanner userInput, PrintWriter message) {
         this.message = message;
         this.userInput = userInput;
     }
