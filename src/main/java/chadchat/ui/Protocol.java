@@ -15,7 +15,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-public class Protocol {
+public class Protocol{
 
     private final Scanner in;
     private final InputStream inputStream;

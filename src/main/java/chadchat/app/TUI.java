@@ -1,5 +1,6 @@
 package chadchat.app;
 
+import chadchat.api.ChadChat;
 import chadchat.db.DBConnect;
 import chadchat.db.SqlStatements;
 import chadchat.domain.User;
@@ -55,6 +56,8 @@ public class TUI {
             }
             if (SHA256.sha256(password).equals(password2)) {
                 doPassWordsMatch = true;
+                message.println("Login successful!");
+                message.flush();
                 //Login user to a place where user can start chat with a given user
                 //User has an option to view unread messages
                 //User can join chatrooms
@@ -138,5 +141,14 @@ public class TUI {
 
     //Creates a user in the database based on previous input information.
         db.executeUpdate(SqlStatements.insertUserIntoDB(new User(iD, userName, password2, eMail)));
+        userInput.nextLine();
+        message.println("User created succesfully!");
+        message.flush();
+
+        StartMenu startMenu = new StartMenu(new TUI(userInput, message));
+        startMenu.startChadChat(welcomeMessage());
+    }
+    public String getUserName(User user){
+        return user.getName();
     }
 }
