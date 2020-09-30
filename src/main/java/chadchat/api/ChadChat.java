@@ -16,9 +16,9 @@ public class ChadChat {
     private final Set<MessageObserver> messageObservers = new HashSet<>();
     private final List<Message> messages = new ArrayList<>();
 
-    public void createMessage(User user, String message) {
+    public void createMessage(String name, String message) {
         // Create message correctly.
-        Message msg = new Message(message);
+        Message msg = new Message(name, message);
         messages.add(msg);
 
         synchronized (this) {
@@ -27,7 +27,7 @@ public class ChadChat {
             }
         }
     }
-    public void runStartMenu(InputStream in, PrintWriter out){
+    public User runStartMenu(InputStream in, PrintWriter out){
         SqlController controller = new SqlController();
         try {
             controller.controller();
@@ -41,17 +41,18 @@ public class ChadChat {
         TUI tui = new TUI(scanner, pw);
         StartMenu start = new StartMenu(tui);
         try {
-            start.startChadChat(tui.welcomeMessage());
+           return start.startChadChat(tui.welcomeMessage());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public Iterable<Message> getNewMessages(LocalDateTime after) {
         // Database get messages
-        return List.of(new Message("message"));
+        return List.of(new Message("userName", "message"));
     }
 
     public synchronized void registerMessageObserver(MessageObserver observer) {

@@ -29,10 +29,10 @@ public class Client implements Runnable, ChadChat.MessageObserver {
         chadChat.registerMessageObserver(this);
 
         final Scanner scanner = new Scanner(in);
-        chadChat.runStartMenu(in, new PrintWriter(out, true));
+        User user = chadChat.runStartMenu(in, new PrintWriter(out, true));
         while (true) {
 
-            chadChat.createMessage(null, scanner.nextLine());
+            chadChat.createMessage(user.getName(), scanner.nextLine());
         }
     }
 

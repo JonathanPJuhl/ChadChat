@@ -31,7 +31,7 @@ public class TUI {
         return answer;
     }
     //change login to signIn signup with a uppercase U
-    public void loginPage() throws SQLException, ClassNotFoundException {
+    public User loginPage() throws SQLException, ClassNotFoundException {
         DBConnect db = new DBConnect();
         String userName = "";
         String password = "";
@@ -58,6 +58,7 @@ public class TUI {
                 doPassWordsMatch = true;
                 message.println("Login successful!");
                 message.flush();
+                return new User(userName, password);
                 //Login user to a place where user can start chat with a given user
                 //User has an option to view unread messages
                 //User can join chatrooms
@@ -66,6 +67,7 @@ public class TUI {
                 message.flush();
             }
         }
+        return null;
     }
 
     public void signupPage() throws SQLException, ClassNotFoundException {
@@ -147,8 +149,7 @@ public class TUI {
 
         StartMenu startMenu = new StartMenu(new TUI(userInput, message));
         startMenu.startChadChat(welcomeMessage());
+
     }
-    public String getUserName(User user){
-        return user.getName();
-    }
+
 }

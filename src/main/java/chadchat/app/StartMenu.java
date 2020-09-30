@@ -1,5 +1,7 @@
 package chadchat.app;
 
+import chadchat.domain.User;
+
 import java.sql.SQLException;
 
 public class StartMenu {
@@ -11,15 +13,19 @@ public class StartMenu {
 
 
     private final TUI tui;
-    public void startChadChat(int answer) throws SQLException, ClassNotFoundException {
+    public User startChadChat(int answer) throws SQLException, ClassNotFoundException {
         String response = Integer.toString(answer);
         switch (response){
-            case "1": tui.loginPage();
-                break;
+            case "1":
+                return tui.loginPage();
+
             case "2": tui.signupPage();
-                break;
+            return null;
+
             case "3":
-                break;
+                return null;
+
         }
+        return null;
     }
 }
