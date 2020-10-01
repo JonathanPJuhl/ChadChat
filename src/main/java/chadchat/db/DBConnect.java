@@ -12,7 +12,7 @@ public class DBConnect {
     static final String USER = "chadchatDB";
     static final String PASS = null;
 
-    private static final int version = 2;
+    private static final int version = 1;
 
     public static Connection getConnection() throws SQLException
     {

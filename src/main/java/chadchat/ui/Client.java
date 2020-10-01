@@ -1,5 +1,5 @@
 package chadchat.ui;
-//scp target/chadchat.jar jonathan@165.22.78.140:/opt/chadchat
+//scp target/chadchat.jar jonathan@165.22.78.140:/opt/chadchat FROM MASTER BRANCH IN GIT
 import chadchat.api.ChadChat;
 import chadchat.domain.Message;
 import chadchat.domain.User;
