@@ -28,6 +28,8 @@ public class TUI {
         message.println("3 exit");
         message.flush();
         int answer = userInput.nextInt();
+        message.println(answer);
+        message.flush();
         return answer;
     }
     //change login to signIn signup with a uppercase U
@@ -43,12 +45,16 @@ public class TUI {
             message.println("Please type in username: ");
             message.flush();
             userName = userInput.nextLine();
-
+            message.println(userName);
+            message.flush();
             //password tastet ind som "*"
             message.println("Please type in password: ");
             message.flush();
             password = userInput.nextLine();
-
+            for(int i = 0; i<=password.length(); i++){
+                message.print("*");
+                message.flush();
+            }
             //Make method that checks username vs pass in DB
             ResultSet rs = db.executeQuery(SqlStatements.checkPassword(new User(userName, password)));
             while (rs.next()) {
@@ -93,6 +99,8 @@ public class TUI {
             message.println("Please type in username: ");
             message.flush();
             userName = userInput.nextLine();
+            message.println(userName);
+            message.flush();
             ResultSet rs = db.executeQuery(SqlStatements.doesUsernameAlreadyExist(userName));
 
             if(!rs.next()){
@@ -110,6 +118,9 @@ public class TUI {
             message.println("Please type in email: ");
             message.flush();
             eMail = userInput.nextLine();
+            message.println(eMail);
+            message.flush();
+
             ResultSet rs = db.executeQuery(SqlStatements.doesEmailAlreadyExist(eMail));
             if(!rs.next()){
                 doesEmailExist=true;
@@ -125,9 +136,23 @@ public class TUI {
             message.println("Please enter a password: ");
             message.flush();
             password = userInput.nextLine();
+            for(int i = 0; i<=password.length(); i++){
+                message.print("*");
+                message.flush();
+            }
+            message.println("");
+            message.flush();
+
             message.println("Please reenter password: ");
             message.flush();
             password1 = userInput.nextLine();
+            for(int i = 0; i<=password1.length(); i++){
+                message.print("*");
+                message.flush();
+            }
+            message.println("");
+            message.flush();
+
             //method for making sure pass is correct
             if (password.equals(password1)) {
                 password2 = SHA256.sha256(password);
@@ -146,7 +171,7 @@ public class TUI {
         userInput.nextLine();
         message.println("User created succesfully!");
         message.flush();
-
+        userInput.nextLine();
         StartMenu startMenu = new StartMenu(new TUI(userInput, message));
         startMenu.startChadChat(welcomeMessage());
 
