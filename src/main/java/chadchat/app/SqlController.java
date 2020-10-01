@@ -1,4 +1,4 @@
-package chadchat.app;
+/*package chadchat.app;
 
 import chadchat.db.DBConnect;
 import chadchat.db.SqlStatements;
@@ -12,4 +12,4 @@ public class SqlController {
     public void controller() throws SQLException, ClassNotFoundException {
         db.executeUpdate(sql.createUserTable());
     }
-}
+}*/

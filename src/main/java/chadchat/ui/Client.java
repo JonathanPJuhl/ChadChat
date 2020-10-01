@@ -13,6 +13,7 @@ public class Client implements Runnable, ChadChat.MessageObserver {
     private final InputStream in;
     private final OutputStream out;
     private final ChadChat chadChat;
+    private static boolean keepTexting;
 
     public Client(InputStream in, OutputStream out, ChadChat chadChat) {
         this.in = in;
@@ -22,15 +23,19 @@ public class Client implements Runnable, ChadChat.MessageObserver {
 
     @Override
     public void run() {
+        keepTexting = true;
         chadChat.registerMessageObserver(this);
 
         final Scanner scanner = new Scanner(in);
         User user = chadChat.runStartMenu(in, new PrintWriter(out, true));
-        while (true) {
-
-        chadChat.createMessage(user.getName(), scanner.nextLine());
+        while (keepTexting) {
+            chadChat.createMessage(user.getName(), scanner.nextLine());
 
         }
+        run();
+    }
+    public static void setKeeptexting(){
+        keepTexting = false;
     }
 
     @Override

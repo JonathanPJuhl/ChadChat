@@ -1,16 +1,12 @@
 package chadchat.entries;
 
 import chadchat.api.ChadChat;
-import chadchat.app.SqlController;
-import chadchat.app.StartMenu;
-import chadchat.app.TUI;
 import chadchat.ui.Client;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class Server {
     private final static int PORT = 2222;

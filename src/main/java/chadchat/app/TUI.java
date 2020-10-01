@@ -22,6 +22,7 @@ public class TUI {
     }
 
     public int welcomeMessage(){
+        message.println("!clear");
         message.println("Welcome to ChadChat you have the following options:");
         message.println("1 login");
         message.println("2 Signup");
@@ -31,8 +32,8 @@ public class TUI {
         message.flush();
         return answer;
     }
-    public int loginMessage(User user){
-        message.println("Welcome to ChadChat, " + user.getName() + " you have the following options:");
+    public int loginMessage(){
+        message.println("Welcome to ChadChat, you have the following options:");
         message.println("1 Enter openchat");
         message.println("2 Send private message");
         message.println("3 Read messages");
@@ -40,11 +41,9 @@ public class TUI {
         int answer = userInput.nextInt();
         if(answer == 1){
             message.println("!clear");
-            message.println("Welcome to the open chat,try sending a message!");
+            message.println("Welcome to the open chat,try sending a message! (type: !.return to go back to main menu)");
             message.flush();
         }
-        message.println(answer);
-        message.flush();
         return answer;
     }
     //change login to signIn signup with a uppercase U
@@ -82,7 +81,7 @@ public class TUI {
                 message.println("Login successful!");
                 message.println("!clear");
                 message.flush();
-                StartMenu.messageMenu(loginMessage(new User(userName, password)));
+                StartMenu.messageMenu(loginMessage());
 
                 return new User(userName, password);
                 //Login user to a place where user can start chat with a given user

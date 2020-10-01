@@ -1,10 +1,11 @@
 package chadchat.api;
 
-import chadchat.app.SqlController;
+//import chadchat.app.SqlController;
 import chadchat.app.StartMenu;
 import chadchat.app.TUI;
 import chadchat.domain.Message;
 import chadchat.domain.User;
+import chadchat.ui.Client;
 
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -16,10 +17,13 @@ public class ChadChat {
     private final Set<MessageObserver> messageObservers = new HashSet<>();
     private final List<Message> messages = new ArrayList<>();
 
-    public void createMessage(String name, String message) {
+
+    public void createMessage(String name, String message)  {
         // Create message correctly.
         Message msg = new Message(name, message);
         if(msg.getMessage().equals("!.return")){
+            PrintWriter out = new PrintWriter(System.out);
+            Client.setKeeptexting();
             return;
         }
         messages.add(msg);
@@ -31,14 +35,14 @@ public class ChadChat {
         }
     }
     public User runStartMenu(InputStream in, PrintWriter out){
-        SqlController controller = new SqlController();
+        /*SqlController controller = new SqlController();
         try {
             controller.controller();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
         PrintWriter pw = new PrintWriter(out);
         final Scanner scanner = new Scanner(in);
         TUI tui = new TUI(scanner, pw);
