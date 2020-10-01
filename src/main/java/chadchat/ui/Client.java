@@ -28,7 +28,8 @@ public class Client implements Runnable, ChadChat.MessageObserver {
         User user = chadChat.runStartMenu(in, new PrintWriter(out, true));
         while (true) {
 
-            chadChat.createMessage(user.getName(), scanner.nextLine());
+        chadChat.createMessage(user.getName(), scanner.nextLine());
+
         }
     }
 

@@ -9,6 +9,10 @@ public class Message {
         this.username = username;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
     @Override
     public String toString() {
         return username + " says: " +

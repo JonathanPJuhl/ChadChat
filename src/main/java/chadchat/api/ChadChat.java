@@ -19,6 +19,9 @@ public class ChadChat {
     public void createMessage(String name, String message) {
         // Create message correctly.
         Message msg = new Message(name, message);
+        if(msg.getMessage().equals("!.return")){
+            return;
+        }
         messages.add(msg);
 
         synchronized (this) {

@@ -25,9 +25,24 @@ public class TUI {
         message.println("Welcome to ChadChat you have the following options:");
         message.println("1 login");
         message.println("2 Signup");
-        message.println("3 exit");
         message.flush();
         int answer = userInput.nextInt();
+        message.println(answer);
+        message.flush();
+        return answer;
+    }
+    public int loginMessage(User user){
+        message.println("Welcome to ChadChat, " + user.getName() + " you have the following options:");
+        message.println("1 Enter openchat");
+        message.println("2 Send private message");
+        message.println("3 Read messages");
+        message.flush();
+        int answer = userInput.nextInt();
+        if(answer == 1){
+            message.println("!clear");
+            message.println("Welcome to the open chat,try sending a message!");
+            message.flush();
+        }
         message.println(answer);
         message.flush();
         return answer;
@@ -65,7 +80,10 @@ public class TUI {
             if (SHA256.sha256(password).equals(password2)) {
                 doPassWordsMatch = true;
                 message.println("Login successful!");
+                message.println("!clear");
                 message.flush();
+                StartMenu.messageMenu(loginMessage(new User(userName, password)));
+
                 return new User(userName, password);
                 //Login user to a place where user can start chat with a given user
                 //User has an option to view unread messages

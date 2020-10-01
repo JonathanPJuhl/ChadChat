@@ -22,8 +22,20 @@ public class StartMenu {
             case "2": tui.signupPage();
             return null;
 
-            case "3":
+
+        }
+        return null;
+    }
+    public final static User messageMenu(int answer) throws SQLException, ClassNotFoundException {
+        final TUI tui;
+        String response = Integer.toString(answer);
+        switch (response){
+            case "1":
                 return null;
+
+            case "2": //tui.signupPage();
+                return null;
+
 
         }
         return null;
