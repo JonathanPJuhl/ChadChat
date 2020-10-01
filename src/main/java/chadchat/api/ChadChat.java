@@ -22,7 +22,6 @@ public class ChadChat {
         // Create message correctly.
         Message msg = new Message(name, message);
         if(msg.getMessage().equals("!.return")){
-            PrintWriter out = new PrintWriter(System.out);
             Client.setKeeptexting();
             return;
         }
