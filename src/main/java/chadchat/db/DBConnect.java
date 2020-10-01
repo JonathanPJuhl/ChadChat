@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public class DBConnect {
 
-    // Don't need JDBC driver in java 4+
-    //final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/chadchatDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     //  Database credentials

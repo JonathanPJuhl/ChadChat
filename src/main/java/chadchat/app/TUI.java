@@ -55,6 +55,8 @@ public class TUI {
                 message.print("*");
                 message.flush();
             }
+            message.println("");
+            message.flush();
             //Make method that checks username vs pass in DB
             ResultSet rs = db.executeQuery(SqlStatements.checkPassword(new User(userName, password)));
             while (rs.next()) {

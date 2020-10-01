@@ -11,7 +11,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "User: " + username+"\n says: " +
+        return username+"\nsays: " +
                 message;
     }
 }

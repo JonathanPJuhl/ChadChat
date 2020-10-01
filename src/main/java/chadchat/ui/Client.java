@@ -1,16 +1,12 @@
 package chadchat.ui;
-
+//scp target/chadchat.jar jonathan@165.22.78.140:/opt/chadchat
 import chadchat.api.ChadChat;
-import chadchat.app.SqlController;
-import chadchat.app.StartMenu;
-import chadchat.app.TUI;
 import chadchat.domain.Message;
 import chadchat.domain.User;
 
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Client implements Runnable, ChadChat.MessageObserver {
@@ -38,6 +34,7 @@ public class Client implements Runnable, ChadChat.MessageObserver {
 
     @Override
     public void notifyNewMessages(Message msg) {
+
         new PrintWriter(out, true).println(msg);
     }
 }

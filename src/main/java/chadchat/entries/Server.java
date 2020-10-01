@@ -16,16 +16,8 @@ public class Server {
     private final static int PORT = 2222;
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
-        //Migrate.runMigrations();
-       /* SqlController controller = new SqlController();
-        controller.controller();
-        PrintWriter pw = new PrintWriter(System.out);
-        //Scanner scanner = new Scanner(System.in);
-        InputStream scanner = null;
-        TUI tui = new TUI(scanner, pw);
-        StartMenu start = new StartMenu(tui);
-        start.startChadChat(tui.welcomeMessage());
-*/
+        Migrate.runMigrations();
+
         try (ServerSocket serverSocket = new ServerSocket(PORT)){
             ChadChat chadChat = new ChadChat();
             System.out.println("Server started at: " + serverSocket);
