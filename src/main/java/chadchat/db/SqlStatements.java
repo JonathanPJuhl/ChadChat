@@ -49,13 +49,13 @@ public class SqlStatements {
         return sql;
     }
     public static String findUserIdFromUserName(String userName){
-        String sql = "SELECT ID FROM users WHERE UserName = '"+userName+"';";
+        String sql = "SELECT ID FROM users WHERE UserName = '" + userName +"';";
         return sql;
     }
 
     public static String sendUserAMessage(String message, User user, int recipientId){
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:MM:SS");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formatDateTime = now.format(format);
         String sql = "INSERT INTO inbox(recipientID, message, senderID, senderName, sendTime, markAsRead) VALUES ("
                 + recipientId +
@@ -65,6 +65,10 @@ public class SqlStatements {
                 ", '" + formatDateTime + "'" +
                 ", 0);";
         System.out.println(sql);
+        return sql;
+    }
+    public static String readMyMessages(int id){
+        String sql = "SELECT senderName, message, sendTime FROM inbox WHERE recipientID = '"+id+"';";
         return sql;
     }
     /*CREATE TABLE IF NOT EXISTS inbox(

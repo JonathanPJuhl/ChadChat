@@ -70,4 +70,9 @@ public class DBConnect {
     }
 
 
+    public PreparedStatement prepareStatement(String sql) throws SQLException {
+        Connection conn = getConnection();
+        PreparedStatement sqlState = conn.prepareStatement(sql);
+        return sqlState;
+    }
 }

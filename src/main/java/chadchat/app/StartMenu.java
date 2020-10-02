@@ -39,7 +39,9 @@ public class StartMenu {
                 tui.privateMessagePrompt(userName);
                 return null;
 
-
+            case "3":
+                tui.readMyMessage(userName);
+                return null;
         }
         return null;
     }

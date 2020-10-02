@@ -7,6 +7,7 @@ import chadchat.domain.User;
 
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -60,27 +61,30 @@ public class TUI {
         DBConnect db = new DBConnect();
         boolean doesUserExist = false;
         int userId = 0;
+        String recipient ="";
         //Ask for a username
         while(!doesUserExist) {
             userInput.nextLine();
             message.println("Please choose recipient!: ");
             message.flush();
-            String recipient = userInput.nextLine();
+            recipient = userInput.nextLine();
             //doesRecipientExist
             ResultSet rs = db.executeQuery(SqlStatements.doesUsernameAlreadyExist(recipient));
             if (!rs.next()) {
                 message.println("User cannot be found, please try again!");
                 message.flush();
             } else {
-                ResultSet rs2 = db.executeQuery(SqlStatements.findUserIdFromUserName(recipient));
+                //PreparedStatement ps = db.prepareStatement(SqlStatements.findUserIdFromUserName());
+                //ps.setString(1, "'"+recipient+"'");
+                ResultSet rs2 =  db.executeQuery(SqlStatements.findUserIdFromUserName(userName));;
 
                 while(rs2.next()){
-                    userId = rs.findColumn("ID");
+                    userId = rs.getInt("ID");
                 }
                 doesUserExist = true;
             }
         }
-        message.println("Recipient: " + userName);
+        message.println("Recipient: " + recipient);
         message.flush();
         ResultSet rs3 = db.executeQuery(SqlStatements.doesUsernameAlreadyExist(userName));
         while (rs3.next()){
@@ -250,4 +254,31 @@ public class TUI {
 
     }
 
+    public void readMyMessage(String userName) throws SQLException, ClassNotFoundException {
+        DBConnect db = new DBConnect();
+        int id = 0;
+        String user = "";
+        String messages = "";
+        String time = "";
+        //PreparedStatement ps = db.prepareStatement(SqlStatements.findUserIdFromUserName());
+        //ps.setString(1, userName);
+        ResultSet rs = db.executeQuery(SqlStatements.findUserIdFromUserName(userName));
+    while (rs.next()){
+            id = rs.getInt("ID");
+        }
+        message.println("ID: " + id);
+        message.flush();
+        message.println("user: " + userName);
+        message.flush();
+        ResultSet rs2 = db.executeQuery(SqlStatements.readMyMessages(id));
+
+        while(rs2.next()){
+            user = rs2.getString("senderName");
+            messages = rs2.getString("message");
+            time = rs2.getString("sendTime");
+            userInput.nextLine();
+        }
+        message.println(user + " " + messages + " " + time);
+        message.flush();
+    }
 }
