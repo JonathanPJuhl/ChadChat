@@ -35,6 +35,7 @@ public class Client implements Runnable, ChadChat.MessageObserver {
         run();
     }
     public static void setKeeptexting(){
+
         keepTexting = false;
     }
 

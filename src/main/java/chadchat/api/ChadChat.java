@@ -34,14 +34,6 @@ public class ChadChat {
         }
     }
     public User runStartMenu(InputStream in, PrintWriter out){
-        /*SqlController controller = new SqlController();
-        try {
-            controller.controller();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }*/
         PrintWriter pw = new PrintWriter(out);
         final Scanner scanner = new Scanner(in);
         TUI tui = new TUI(scanner, pw);

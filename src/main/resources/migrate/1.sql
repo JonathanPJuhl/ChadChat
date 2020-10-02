@@ -9,9 +9,9 @@ primary key (ID)
 CREATE TABLE IF NOT EXISTS inbox(
 recipientID int,
 message varchar(300),
-messageID int unique,
+messageID int unique auto_increment,
 senderID int,
-senderName varchar(45);
+senderName varchar(45),
 sendTime timeStamp,
 markAsRead TINYINT(1));
 

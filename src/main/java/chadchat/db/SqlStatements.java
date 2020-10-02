@@ -45,4 +45,27 @@ public class SqlStatements {
                 ");";
         return sql;
     }
+    public static String findUserIdFromUserName(String userName){
+        String sql = "SELECT ID FROM users WHERE UserName = '"+userName+"';";
+        return sql;
+    }
+
+    public static String sendUserAMessage(String message, User user, int recipientId){
+        String sql = "INSERT INTO inbox(recipientID, message, senderID, senderName, markAsRead) VALUES ("
+                + recipientId +
+                "," + message +
+                "," + user.getId() +
+                "," + user.getName() +
+                ", 0);";
+
+        return sql;
+    }
+    /*CREATE TABLE IF NOT EXISTS inbox(
+            recipientID int,
+            message varchar(300),
+    messageID int unique,
+    senderID int,
+    senderName varchar(45);
+    sendTime timeStamp,
+    markAsRead TINYINT(1));*/
 }

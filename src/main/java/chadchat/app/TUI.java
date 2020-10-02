@@ -13,12 +13,19 @@ import java.util.Scanner;
 
 public class TUI {
 
-    private final PrintWriter message;
-    private final Scanner userInput;
+    private PrintWriter message;
+    private Scanner userInput;
+    private User user;
 
+    public TUI(Scanner userInput, PrintWriter message, User user) {
+        this.message = message;
+        this.userInput = userInput;
+        this.user = user;
+    }
     public TUI(Scanner userInput, PrintWriter message) {
         this.message = message;
         this.userInput = userInput;
+
     }
 
     public int welcomeMessage(){
@@ -45,6 +52,45 @@ public class TUI {
             message.flush();
         }
         return answer;
+    }
+    public void privateMessagePrompt() throws SQLException, ClassNotFoundException {
+        DBConnect db = new DBConnect();
+        boolean doesUserExist = false;
+        int userId = 0;
+        //Ask for a username
+        while(!doesUserExist) {
+            message.println("Please choose recipient!: ");
+            message.flush();
+            String recipient = userInput.nextLine();
+            //doesRecipientExist
+            ResultSet rs = db.executeQuery(SqlStatements.doesUsernameAlreadyExist(recipient));
+            if (!rs.next()) {
+                message.println("User cannot be found, please try again!");
+                message.flush();
+            } else {
+                ResultSet rs2 = db.executeQuery(SqlStatements.findUserIdFromUserName(recipient));
+
+                while(rs2.next()){
+                    userId = rs.findColumn("ID");
+                }
+                doesUserExist = true;
+            }
+        }
+
+
+
+        //Perhaps make it possible to search for users
+        message.println(this.user.toString());
+        message.flush();
+        message.println("Please type your message: ");
+        message.flush();
+        String message2 = userInput.nextLine();
+
+        ResultSet rs3 = db.executeQuery(SqlStatements.sendUserAMessage(message2, this.user, userId));
+        //When a user is selected input a message for general db, and connect it via user id's
+
+
+        return;
     }
     //change login to signIn signup with a uppercase U
     public User loginPage() throws SQLException, ClassNotFoundException {
@@ -81,14 +127,15 @@ public class TUI {
                 message.println("Login successful!");
                 message.println("!clear");
                 message.flush();
-                StartMenu.messageMenu(loginMessage());
-
+                StartMenu startMenu = new StartMenu(new TUI(userInput, message));
+                startMenu.messageMenu(loginMessage());
+                user = new User(userName, password);
                 return new User(userName, password);
                 //Login user to a place where user can start chat with a given user
                 //User has an option to view unread messages
                 //User can join chatrooms
             } else {
-                message.println("Wrong username or password, try again. \n");
+                 message.println("Wrong username or password, try again. \n");
                 message.flush();
             }
         }
@@ -191,7 +238,7 @@ public class TUI {
         message.println("User created succesfully!");
         message.flush();
         userInput.nextLine();
-        StartMenu startMenu = new StartMenu(new TUI(userInput, message));
+        StartMenu startMenu = new StartMenu(new TUI(userInput, message, new User(iD, userName, password2, eMail)));
         startMenu.startChadChat(welcomeMessage());
 
     }
