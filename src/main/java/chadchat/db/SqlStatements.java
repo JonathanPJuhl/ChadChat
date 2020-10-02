@@ -2,6 +2,9 @@ package chadchat.db;
 
 import chadchat.domain.User;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class SqlStatements {
 
     public static String checkPassword(User user) {
@@ -51,13 +54,17 @@ public class SqlStatements {
     }
 
     public static String sendUserAMessage(String message, User user, int recipientId){
-        String sql = "INSERT INTO inbox(recipientID, message, senderID, senderName, markAsRead) VALUES ("
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:MM:SS");
+        String formatDateTime = now.format(format);
+        String sql = "INSERT INTO inbox(recipientID, message, senderID, senderName, sendTime, markAsRead) VALUES ("
                 + recipientId +
-                "," + message +
+                ", '" + message + "'" +
                 "," + user.getId() +
-                "," + user.getName() +
+                ", '" + user.getName() + "'" +
+                ", '" + formatDateTime + "'" +
                 ", 0);";
-
+        System.out.println(sql);
         return sql;
     }
     /*CREATE TABLE IF NOT EXISTS inbox(

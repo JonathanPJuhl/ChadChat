@@ -28,7 +28,7 @@ public class StartMenu {
         }
         return null;
     }
-    public final User messageMenu(int answer) throws SQLException, ClassNotFoundException {
+    public final User messageMenu(int answer, String userName) throws SQLException, ClassNotFoundException {
 
         String response = Integer.toString(answer);
         switch (response){
@@ -36,7 +36,7 @@ public class StartMenu {
                 return null;
 
             case "2": //tui.signupPage();
-                tui.privateMessagePrompt();
+                tui.privateMessagePrompt(userName);
                 return null;
 
 

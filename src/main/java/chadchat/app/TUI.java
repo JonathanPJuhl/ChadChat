@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TUI {
@@ -16,6 +17,8 @@ public class TUI {
     private PrintWriter message;
     private Scanner userInput;
     private User user;
+    ArrayList<User> users = new ArrayList<>();
+
 
     public TUI(Scanner userInput, PrintWriter message, User user) {
         this.message = message;
@@ -53,12 +56,13 @@ public class TUI {
         }
         return answer;
     }
-    public void privateMessagePrompt() throws SQLException, ClassNotFoundException {
+    public void privateMessagePrompt(String userName) throws SQLException, ClassNotFoundException {
         DBConnect db = new DBConnect();
         boolean doesUserExist = false;
         int userId = 0;
         //Ask for a username
         while(!doesUserExist) {
+            userInput.nextLine();
             message.println("Please choose recipient!: ");
             message.flush();
             String recipient = userInput.nextLine();
@@ -76,17 +80,20 @@ public class TUI {
                 doesUserExist = true;
             }
         }
-
-
+        message.println("Recipient: " + userName);
+        message.flush();
+        ResultSet rs3 = db.executeQuery(SqlStatements.doesUsernameAlreadyExist(userName));
+        while (rs3.next()){
+            User u = new User(rs3.getInt("ID"), userName, rs3.getString("PassWord"), rs3.getString("Email"));
+            users.add(u);
+        }
 
         //Perhaps make it possible to search for users
-        message.println(this.user.toString());
-        message.flush();
         message.println("Please type your message: ");
         message.flush();
         String message2 = userInput.nextLine();
 
-        ResultSet rs3 = db.executeQuery(SqlStatements.sendUserAMessage(message2, this.user, userId));
+        db.executeUpdate(SqlStatements.sendUserAMessage(message2, users.get(0), userId));
         //When a user is selected input a message for general db, and connect it via user id's
 
 
@@ -100,6 +107,7 @@ public class TUI {
         String password2 = "";
         boolean doPassWordsMatch = false;
         userInput.nextLine();
+
         while(!doPassWordsMatch) {
 
             message.println("Please type in username: ");
@@ -128,8 +136,7 @@ public class TUI {
                 message.println("!clear");
                 message.flush();
                 StartMenu startMenu = new StartMenu(new TUI(userInput, message));
-                startMenu.messageMenu(loginMessage());
-                user = new User(userName, password);
+                startMenu.messageMenu(loginMessage(), userName);
                 return new User(userName, password);
                 //Login user to a place where user can start chat with a given user
                 //User has an option to view unread messages
